@@ -1,47 +1,61 @@
 #include "main.h"
+#define BUFF_SIZE 1024
+void print_buffer(char buffer[], int *buff_ind);
+
 /**
-* _printf - prints anything
-* @format:  string
-* Return: number of bytes printed
-*/
-int _printf (const char *format, ...)
-int sum= 0;
-va_list ap;
-char *p, *start;
-params_t params = PARAMS INIT;
-va_start (ap, format);
-if (!format || (format [0] == '%' && !format [1]))
+ * _printf - Printf function
+ * @format: format
+ * Return: Printed chars
+ */
+int _printf(const char *format, ...)
+{
+if (format == NULL)
 return (-1);
-if (format [0] == '%' && format [1] == ' ' && !format [2])
-return (-1);
-for (p (char*) format; *p; p++)
+int printed_chars = 0;
+int buff_ind = 0;
+char buffer[BUFF_SIZE];
+va_list list;
+va_start(list, format);
+for (int i = 0; format[i] != '\0'; i++)
 {
-init_params (&params, ap);
-if (*p!= '%')
+if (format[i] != '%')
 {
-sum += _putchar (*p);
-continue;
+buffer[buff_ind++] = format[i];
+if (buff_ind == BUFF_SIZE)
+print_buffer(buffer, &buff_ind);
+printed_chars++;
 }
-start = p;
-p++;
-while (get_flag (p, &params))
-{
-p++;
-}
-p = get_width (p, &params, ap);
-p++;
-}
-p = get_width (p, &params, ap);
-p = get_precision (p, &params, ap);
-if (get_modifier (p, &params))
-p++;
-if (!get_specifier (p))
-sum += print_from_to (start, p,
-params.1_modifier || params.h_modifier ? p - 1 : 0);
 else
-sum += get_print_func(p, ap, &params);
+{
+print_buffer(buffer, &buff_ind);
+int flags, width, precision, size;
+flags = get_flags(format, &i);
+width = get_width(format, &i, list);
+precision = get_precision(format, &i, list);
+size = get_size(format, &i);
+i++;
+int printed = handle_print(format, &i, list, buffer,
+flags, width, precision, size);
+if (printed == -1)
+return (-1);
+printed_chars += printed;
 }
-_putchar(BUF_FLUSH);
-va_end(ap);
-return (sum);
+}
+
+print_buffer(buffer, &buff_ind);
+va_end(list);
+
+return (printed_chars);
+}
+/**
+ * print_buffer - Prints the contents of the buffer
+ * @buffer: Array of chars
+ * @buff_ind: Index at which to add the next char
+ */
+void print_buffer(char buffer[], int *buff_ind)
+{
+if (*buff_ind > 0)
+write(1, buffer, *buff_ind);
+
+*buff_ind = 0;
 }
