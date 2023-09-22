@@ -1,5 +1,5 @@
 #ifndef _PRINTF_H
-#define __PRINTE_H
+#define _PRINTE_H
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -8,13 +8,13 @@
 #define OUTPUT_BUF_SIZE 1024
 #define BUF_FLUSH -1
 #define NULL_STRING "(null)"
-#define PARAMS_INIT (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#define CONVERT_LOWERCASE 1
+#define PARAMS_INIT {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+#define COVERT_LOWERCASE 1
 #define CONVERT_UNSIGNED 2
 
 /**
-* struct - parameters parameters struct
-* @unsign: flag if unsigned value
+* struct - parameters struct
+* @unsign: unsigned value
 * @plus_flag: on if plus_flag specified
 * @space_flag: on if hashtag_flag specified
 * @hashtag_flag: on if _flag specified
@@ -51,13 +51,13 @@ char *specifier;
 int (*f) (va_list, params_t *);
 } specifier_t;
 /* _put.c module 1*/
-int puts (char *str);
-int putchar (int c);
+int _puts (char *str);
+int _putchar (int c);
 /* print_functions.c module */
 int print_char (va_list ap, params_t *params);
-int print _int (va_list ap, params_t *params);
+int print_int (va_list ap, params_t *params);
 int print_string (va_list ap, params_t *params);
-int print percent (va_list ap, params_t *params);
+int print_percent (va_list ap, params_t *params);
 int print_S (va_list ap, params_t *params);
 /* number.c module */
 char *convert (long int num, int base, int flags, params_t *params);
@@ -79,8 +79,8 @@ int print_from_to (char *start, char *stop, char *except);
 int print_rev (va_list ap, params_t *params);
 int print_rot13 (va_list ap, params_t *params);
 /* print_number.c module */
-int isdigit (int c);
-int strlen (char *s);
+int _isdigit (int c);
+int _strlen (char *s);
 int print_number (char *str, params_t *params);
 int print_number_right_shift (char *str, params_t *params);
 int print_number_left_shift (char *str, params_t *params);
