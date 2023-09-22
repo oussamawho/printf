@@ -10,7 +10,7 @@
 int get_size(const char *format, int *i)
 {
 
-	int size = 0;
+	int s = 0;
 	int i = *i + 1;
 
 	if (format[i] == 'l')
