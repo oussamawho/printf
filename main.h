@@ -89,5 +89,5 @@ void init_params (params_t *params, va_list ap);
 /* string_fields.c modoule */
 char *get precision (char *p, params_t *params, va_list ap);
 /* __prinf.c module */
-int printf (const char *format, ...);
+int _printf (const char *format, ...);
 #endif
