@@ -24,8 +24,7 @@ int append_hexa_code(char ascii_code, char buffer[], int i)
 {
 	char map[] = "0123456789ABCDEF";
 	if (ascii_code < 0)
-		ascii_code *= -1;
-
+	ascii_code *= -1;
 	buffer[i++] = '\\';
 	buffer[i++] = 'x';
 
