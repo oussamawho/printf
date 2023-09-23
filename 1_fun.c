@@ -35,7 +35,7 @@ int print_unsigned(va_list types, char buffer[],
 }
 
 /**
- * print_octal - Prints an unsigned number in octal 
+ * print_octal - Prints an unsigned number in octal
  * @types: Lista of arguments
  * @buffer:  array
  * @flags:  Calculatesflags
